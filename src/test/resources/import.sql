@@ -1,0 +1,4 @@
+CREATE TABLE CODA_EVE
+(
+    ID_ALLARME        int
+);
