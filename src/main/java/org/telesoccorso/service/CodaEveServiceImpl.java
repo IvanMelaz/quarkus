@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import javax.transaction.Transactional;
 
 @ApplicationScoped
 public class CodaEveServiceImpl implements  CodaEveService{
@@ -34,12 +35,11 @@ public class CodaEveServiceImpl implements  CodaEveService{
 
     }
 
+    @Transactional
     @Override
     public void insertAllarmiInCodaEve_Brondi(String telefono, String filename, String centrale) {
         try {
-            EntityTransaction entityTransaction = entityManager.getTransaction();
-            entityTransaction.begin();
-            StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("{call sp_i_InsertAllarmi_in_CodaEve_Brondi(?,?,?)}");
+            StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("sp_i_InsertAllarmi_in_CodaEve_Brondi");
             storedProcedureQuery.registerStoredProcedureParameter(1,String.class, ParameterMode.IN);
             storedProcedureQuery.registerStoredProcedureParameter(2,String.class, ParameterMode.IN);
             storedProcedureQuery.registerStoredProcedureParameter(3,String.class, ParameterMode.IN);
@@ -47,7 +47,6 @@ public class CodaEveServiceImpl implements  CodaEveService{
             storedProcedureQuery.setParameter(2,"");
             storedProcedureQuery.setParameter(3,centrale);
             storedProcedureQuery.executeUpdate();
-            entityTransaction.commit();
         } catch (Exception e) {
             throw new TscException(e);
         }
