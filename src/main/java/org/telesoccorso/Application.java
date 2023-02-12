@@ -3,7 +3,6 @@ package org.telesoccorso;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import org.jboss.logging.Logger;
-import org.telesoccorso.webservice.TelemedicareServiceImpl;
 
 @QuarkusMain
 public class Application {

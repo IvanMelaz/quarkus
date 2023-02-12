@@ -1,7 +1,6 @@
 package org.telesoccorso.h2.util;
 
 import org.jboss.logging.Logger;
-import org.telesoccorso.webservice.TelemedicareServiceImpl;
 
 public class H2StoredProcedures {
     private static final Logger logger = Logger.getLogger(H2StoredProcedures.class);

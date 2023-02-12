@@ -5,7 +5,6 @@ import org.telesoccorso.exception.TscException;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import javax.transaction.Transactional;
@@ -22,23 +21,23 @@ public class CodaEveServiceImpl implements  CodaEveService{
 
     @Override
     public void removeAllarme(String id_allarme) {
-
+        // TODO document why this method is empty
     }
 
     @Override
     public void updateAllarme(String id_allarme, String user) {
-
+        // TODO document why this method is empty
     }
 
     @Override
     public void insertAllarmiInCodaEve(String matricola, String evento, String centrale, String mux, String ritardo) {
-
+        // TODO document why this method is empty
     }
 
     @Transactional
     @Override
     public void insertAllarmiInCodaEve_Brondi(String telefono, String filename, String centrale) {
-        try {
+        try{
             StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("sp_i_InsertAllarmi_in_CodaEve_Brondi");
             storedProcedureQuery.registerStoredProcedureParameter(1,String.class, ParameterMode.IN);
             storedProcedureQuery.registerStoredProcedureParameter(2,String.class, ParameterMode.IN);
@@ -47,6 +46,7 @@ public class CodaEveServiceImpl implements  CodaEveService{
             storedProcedureQuery.setParameter(2,"");
             storedProcedureQuery.setParameter(3,centrale);
             storedProcedureQuery.executeUpdate();
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
             throw new TscException(e);
         }
